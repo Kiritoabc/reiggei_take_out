@@ -27,7 +27,7 @@ public class UserController {
      * @return
      */
     @PostMapping("/sendMsg")
-    public R<String> sendMsg(HttpSession session, @RequestBody User user){
+    public R<String> sendMsg(@RequestBody User user, HttpSession session){
         return userService.sendMag(session,user);
     }
 

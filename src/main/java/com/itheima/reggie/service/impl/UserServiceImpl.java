@@ -62,7 +62,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
         //获取手机号
         String phone = user.get("phone").toString();
-     /*
+
         //获取验证码
         String code = user.get("code").toString();
         //从Session中获取保存的验证码
@@ -81,21 +81,22 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                 one.setStatus(1);
                 save(one);
             }
+            session.setAttribute("user",one.getId());
             return R.success(one);
         }
-        return R.error("登录失败");*/
-        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(User::getPhone,phone);
-        User one = getOne(queryWrapper);
-        if(one == null){
-            //如果是新用户，就自动完成注册
-            one = new User();
-            one.setPhone(phone);
-            one.setStatus(1);
-            save(one);
-        }
-        session.setAttribute("user",one.getId());
-        return R.success(one);
+        return R.error("登录失败");
+//        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+//        queryWrapper.eq(User::getPhone,phone);
+//        User one = getOne(queryWrapper);
+//        if(one == null){
+//            //如果是新用户，就自动完成注册
+//            one = new User();
+//            one.setPhone(phone);
+//            one.setStatus(1);
+//            save(one);
+//        }
+//        session.setAttribute("user",one.getId());
+//        return R.success(one);
     }
 
     /**
